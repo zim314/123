@@ -9,6 +9,8 @@ import { UserProfileButtonProps } from './user/UserProfileButton/UserProfileButt
 const Header: React.FC = () => {
   const { isLoggedin, logout } = useAuthContext();
 
+  console.log('!@@@@@@@@@@@');
+
   const handleSignOut: UserProfileButtonProps['onSignOut'] = () => {
     logout();
   };

@@ -20,9 +20,9 @@ jobs:
       - name: Check for merge conflicts
         run: |
           git fetch origin main
-          git merge --no-ff --no-commit origin/main
+          git merge --no-ff --no-commit --allow-unrelated-histories origin/main
           if [ $? -ne 0 ]; then
-            echo "Merge conflict detected!"
+            echo "Merge conflict detected or other merge issue!"
             exit 1
           else
             echo "No merge conflict."

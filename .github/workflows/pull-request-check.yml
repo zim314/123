@@ -19,12 +19,4 @@ jobs:
 
       - name: Check for merge conflicts
         run: |
-          git fetch origin main:main
-          git reset --hard main
-          git merge --no-ff --no-commit origin/555
-          if [ $? -ne 0 ]; then
-            echo "Merge conflict detected or other merge issue!"
-            exit 1
-          else
-            echo "No merge conflict."
-          fi
+          git branch

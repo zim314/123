@@ -1,0 +1,29 @@
+name: pull request check
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-merge-conflict:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Git
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+
+      - name: Check for merge conflicts
+        run: |
+          git fetch origin main
+          git merge --no-ff --no-commit origin/main
+          if [ $? -ne 0 ]; then
+            echo "Merge conflict detected!"
+            exit 1
+          else
+            echo "No merge conflict."
+          fi

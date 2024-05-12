@@ -19,4 +19,4 @@ jobs:
 
       - name: Check for merge conflicts
         run: |
-          git branch
+          git checkout origin/main

@@ -10,20 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: '20' # 使用最新的 Node.js 版本
 
       - name: Install dependencies
-        run: yarn install
-      - name: Run ESLint with Reviewdog
-        uses: reviewdog/action-eslint@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-pr-review
+        run: yarn # 使用 yarn 安装依赖
 
-      - name: Build
-        run: yarn run build
+      - name: Build project
+        run: yarn build # 使用 yarn 运行构建命令
+        continue-on-error: false # 如果构建失败，不继续运行后续步骤

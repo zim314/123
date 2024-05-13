@@ -7,7 +7,8 @@ import UserProfileButton from './user/UserProfileButton';
 import { UserProfileButtonProps } from './user/UserProfileButton/UserProfileButton';
 
 const Header: React.FC = () => {
-  console.log('0000');
+
+  console.log('main');
 
   const { isLoggedin, logout } = useAuthContext();
 

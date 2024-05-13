@@ -4,10 +4,10 @@ import { useAuthContext } from 'src/store/AuthProvider/AuthProvider';
 import LoginButton from './user/LoginButton';
 import ResgisterButton from './user/RegisterButton';
 import UserProfileButton from './user/UserProfileButton';
-import xxx from ;
+import { UserProfileButtonProps } from './user/UserProfileButton/UserProfileButton';
 
 const Header: React.FC = () => {
-  console.log('555');
+  console.log('0000');
 
   const { isLoggedin, logout } = useAuthContext();
 

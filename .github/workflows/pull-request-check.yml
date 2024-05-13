@@ -34,6 +34,7 @@ jobs:
           else
             echo "No conflict detected."
             echo "conflict=false" >> $GITHUB_ENV
+          fi
 
       - name: Fail if conflict is detected
         if: ${{ env.conflict == 'true' }}

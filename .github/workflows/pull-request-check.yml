@@ -30,12 +30,11 @@ jobs:
         run: |
           if git ls-files -u | grep -q '.'; then
             echo "Merge conflict detected!"
-            echo "::set-output name=conflict::true"
+            echo "conflict=true" >> $GITHUB_ENV
           else
             echo "No conflict detected."
-            echo "::set-output name=conflict::false"
-          fi
+            echo "conflict=false" >> $GITHUB_ENV
 
       - name: Fail if conflict is detected
-        if: steps.conflicts.outputs.conflict == 'true'
+        if: ${{ env.conflict == 'true' }}
         run: exit 1

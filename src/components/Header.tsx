@@ -4,7 +4,7 @@ import { useAuthContext } from 'src/store/AuthProvider/AuthProvider';
 import LoginButton from './user/LoginButton';
 import ResgisterButton from './user/RegisterButton';
 import UserProfileButton from './user/UserProfileButton';
-import { UserProfileButtonProps } from './user/UserProfileButton/UserProfileButton';
+import xxx from ;
 
 const Header: React.FC = () => {
   console.log('555');

@@ -19,7 +19,6 @@ jobs:
 
       - name: Install dependencies
         run: yarn install
-
       - name: Run ESLint with Reviewdog
         uses: reviewdog/action-eslint@v1
         with:
@@ -28,12 +27,3 @@ jobs:
 
       - name: Build
         run: yarn run build
-        continue-on-error: true
-
-      - name: Notify Build Failure
-        if: failure()
-        uses: 8398a7/action-slack@v3
-        with:
-          status: ${{ job.status }}
-          fields: job,repo,commit,ref,author,took
-          token: ${{ secrets.SLACK_TOKEN }}

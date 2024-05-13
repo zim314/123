@@ -18,7 +18,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: yarn install
 
       - name: Run ESLint with Reviewdog
         uses: reviewdog/action-eslint@v1
@@ -27,7 +27,7 @@ jobs:
           reporter: github-pr-review
 
       - name: Build
-        run: npm run build
+        run: yarn run build
         continue-on-error: true
 
       - name: Notify Build Failure

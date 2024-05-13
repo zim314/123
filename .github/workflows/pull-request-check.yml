@@ -1,22 +1,36 @@
-name: pull request check
+name: Merge Conflict Check
 
 on:
   pull_request:
     branches:
-      - main
+      - main # 主分支名稱，根據需要修改
 
 jobs:
-  check-merge-conflict:
+  conflict-check:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: Checkout main branch
+        uses: actions/checkout@v3
+        with:
+          ref: 'main' # 主分支名稱，根據需要修改
 
-      - name: Set up Git
+      - name: Merge PR branch into main
         run: |
-          git config --global user.email "action@github.com"
-          git config --global user.name "GitHub Action"
+          git fetch origin ${{ github.event.pull_request.head.ref }}
+          git merge --no-ff --no-commit origin/${{ github.event.pull_request.head.ref }}
+        continue-on-error: true # 允許繼續運行即使合併失敗
 
       - name: Check for merge conflicts
+        id: conflicts
         run: |
-          git checkout origin/main
+          if git ls-files -u | grep -q '.'; then
+            echo "Merge conflict detected!"
+            echo "::set-output name=conflict::true"
+          else
+            echo "No conflict detected."
+            echo "::set-output name=conflict::false"
+          fi
+
+      - name: Fail if conflict is detected
+        if: steps.conflicts.outputs.conflict == 'true'
+        run: exit 1
